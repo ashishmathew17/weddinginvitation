@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarah & James - Wedding Invitation</title>
+    <title>Jose & Sheelu - Wedding Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -36,7 +36,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -47,6 +46,7 @@
             background: linear-gradient(135deg, var(--cream) 0%, var(--light) 50%, #EDE8E0 100%);
             position: relative;
             overflow: hidden;
+            padding: 2rem;
         }
 
         .hero::before {
@@ -62,46 +62,55 @@
 
         .hero-content {
             z-index: 1;
-            padding: 2rem;
+            max-width: 700px;
+        }
+
+        .verse {
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .verse-source {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
         }
 
         .hero-ornament {
             width: 120px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin: 2rem auto;
+            margin: 1.5rem auto;
         }
 
-        .hero-date {
+        .invite-text {
             font-size: 1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .hero-names {
-            font-size: clamp(3rem, 10vw, 6rem);
             color: var(--dark);
-            line-height: 1.1;
             margin-bottom: 1rem;
+            line-height: 1.8;
         }
 
-        .hero-names span {
-            display: block;
+        .couple-names {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
         }
 
-        .hero-names .ampersand {
-            font-size: 0.4em;
+        .couple-names .ampersand {
+            font-size: 0.5em;
             font-style: italic;
             color: var(--primary);
             margin: 0.5rem 0;
+            display: block;
         }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
+        .hero-date {
+            font-size: 1.3rem;
             color: var(--primary);
-            font-weight: 300;
+            margin-top: 1.5rem;
             letter-spacing: 2px;
         }
 
@@ -129,18 +138,17 @@
             60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        /* Section Styles */
         section {
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-align: center;
             margin-bottom: 1rem;
             color: var(--dark);
@@ -150,51 +158,22 @@
             width: 60px;
             height: 2px;
             background: var(--accent);
-            margin: 0 auto 3rem;
+            margin: 0 auto 2.5rem;
         }
 
-        /* Our Story */
-        .story {
+        .message {
             background: white;
         }
 
-        .story-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        .message-text {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .story-text p {
-            margin-bottom: 1.5rem;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .story-image {
-            position: relative;
-        }
-
-        .story-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .story-image::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: -20px;
-            bottom: -20px;
-            border: 2px solid var(--accent);
-            border-radius: 4px;
-            z-index: -1;
-        }
-
-        /* Event Details */
         .details {
             background: var(--cream);
         }
@@ -203,60 +182,60 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .detail-card {
             background: white;
-            padding: 3rem 2rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
             border-radius: 4px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .detail-card:hover {
-            transform: translateY(-5px);
         }
 
         .detail-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--primary);
         }
 
         .detail-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
 
         .detail-card p {
             color: #666;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .detail-card .time {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 500;
             color: var(--dark);
-            margin: 1rem 0;
+            margin-top: 0.8rem;
         }
 
-        /* Location */
         .location {
             background: white;
             text-align: center;
         }
 
+        .location-venue {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
         .location-address {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
         }
 
         .map-placeholder {
             width: 100%;
-            height: 300px;
+            height: 200px;
             background: var(--cream);
             display: flex;
             align-items: center;
@@ -265,130 +244,45 @@
             color: #999;
         }
 
-        /* RSVP */
-        .rsvp {
-            background: linear-gradient(135deg, var(--primary) 0%, #6B5A48 100%);
-            color: white;
-        }
-
-        .rsvp .section-title {
-            color: white;
-        }
-
-        .rsvp-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 4px;
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: 2px solid var(--accent);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1.2rem;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: #B8956A;
-        }
-
-        /* Gallery */
-        .gallery {
-            background: var(--cream);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Registry */
-        .registry {
+        .footer-message {
             background: white;
             text-align: center;
         }
 
-        .registry-list {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+        .footer-message p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .footer-message .latin {
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .family-signoff {
             margin-top: 2rem;
         }
 
-        .registry-item {
-            padding: 1.5rem 2rem;
-            border: 1px solid var(--accent);
-            border-radius: 4px;
+        .family-signoff p {
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .family-names {
+            font-size: 1.1rem;
             color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 1.5rem;
         }
 
-        .registry-item:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        /* Footer */
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
         }
 
         footer p {
@@ -396,31 +290,12 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .story-content {
-                grid-template-columns: 1fr;
-            }
-
-            .story-image {
-                order: -1;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             section {
-                padding: 4rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-names {
-                font-size: 2.5rem;
+                padding: 3rem 1.5rem;
             }
 
-            .gallery-grid {
+            .details-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -429,14 +304,29 @@
 <body>
     <section class="hero">
         <div class="hero-content">
-            <p class="hero-date">June 15, 2026</p>
+            <p class="verse">"We love because He first loved us."<br>— 1 John 4:19</p>
+            <p class="verse">"A threefold cord is not quickly broken."<br>— Ecclesiastes 4:12</p>
+            
             <div class="hero-ornament"></div>
-            <h1 class="hero-names">
-                <span>Sarah</span>
-                <span class="ampersand">&</span>
-                <span>James</span>
+            
+            <p class="invite-text">
+                Anitha Paulin & Samon Samuel<br>
+                Thazhchayil, Maruthorvattom P.O., Cherthala<br>
+                cordially invite your esteemed presence and prayers to shower your blessings on the auspicious occasion of the Holy Matrimony of our beloved son,
+            </p>
+            
+            <h1 class="couple-names">
+                <span>Jose Gabri Samuel (Jochu)</span>
+                <span class="ampersand">with</span>
+                <span>Sheelu Tony (Chinnu)</span>
             </h1>
-            <p class="hero-subtitle">We're Getting Married</p>
+            
+            <p class="invite-text" style="margin-top: 1rem;">
+                daughter of Mrs. Nicy Tony & Mr. Tony George
+            </p>
+            
+            <p class="hero-date">Saturday, 11th April 2026</p>
+            
             <div class="hero-ornament"></div>
         </div>
         <div class="scroll-indicator">
@@ -444,20 +334,20 @@
         </div>
     </section>
 
-    <section class="story">
+    <section class="message">
         <div class="container">
-            <h2 class="section-title">Our Story</h2>
+            <p class="message-text">
+                Which will, Deo Volente, be solemnized at<br>
+                St. Andrew's Basilica, Arthunkal<br>
+                followed by a reception at<br>
+                St. Sebastian Parish Hall, near the Church.
+            </p>
             <div class="section-divider"></div>
-            <div class="story-content">
-                <div class="story-text">
-                    <p>It started with a chance meeting at a coffee shop in downtown Boston. James spilled his latte, Sarah offered napkins, and the rest is history.</p>
-                    <p>After three wonderful years of adventures, late-night conversations, and countless memories, James knew he had found his forever. On a beautiful autumn evening, beneath the golden leaves of the Public Garden, he got down on one knee.</p>
-                    <p>Now, we invite you to be part of the next chapter of our story as we say "I do" surrounded by our loved ones.</p>
-                </div>
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop" alt="Couple">
-                </div>
-            </div>
+            <p class="message-text">
+                Your presence and prayers<br>
+                will be a cherished blessing<br>
+                as they begin their life together in Christ.
+            </p>
         </div>
     </section>
 
@@ -467,27 +357,18 @@
             <div class="section-divider"></div>
             <div class="details-grid">
                 <div class="detail-card">
-                    <div class="icon">💒</div>
-                    <h3>The Ceremony</h3>
-                    <p>St. Michael's Cathedral</p>
-                    <p>123 Church Street</p>
-                    <p>Boston, MA</p>
-                    <p class="time">3:00 PM</p>
+                    <div class="icon">✝</div>
+                    <h3>Holy Matrimony</h3>
+                    <p>St. Andrew's Basilica</p>
+                    <p>Arthunkal</p>
+                    <p class="time">11th April 2026</p>
                 </div>
                 <div class="detail-card">
-                    <div class="icon">🥂</div>
-                    <h3>The Reception</h3>
-                    <p>The Grand Ballroom</p>
-                    <p>456 Elegance Avenue</p>
-                    <p>Boston, MA</p>
-                    <p class="time">5:00 PM - 11:00 PM</p>
-                </div>
-                <div class="detail-card">
-                    <div class="icon">👗</div>
-                    <h3>Dress Code</h3>
-                    <p>Formal Attire</p>
-                    <p class="time">Black Tie Optional</p>
-                    <p>We kindly ask guests to wear formal attire.</p>
+                    <div class="icon">🎉</div>
+                    <h3>Reception</h3>
+                    <p>St. Sebastian Parish Hall</p>
+                    <p>Near the Church</p>
+                    <p class="time">Following the Ceremony</p>
                 </div>
             </div>
         </div>
@@ -497,106 +378,29 @@
         <div class="container">
             <h2 class="section-title">Location</h2>
             <div class="section-divider"></div>
-            <p class="location-address">St. Michael's Cathedral, 123 Church Street, Boston, MA 02108</p>
+            <p class="location-venue">St. Andrew's Basilica, Arthunkal</p>
+            <p class="location-address">Arthunkal, Cherthala, Kerala, India</p>
             <div class="map-placeholder">
                 <p>📍 View on Map</p>
             </div>
         </div>
     </section>
 
-    <section class="rsvp">
+    <section class="footer-message">
         <div class="container">
-            <h2 class="section-title">RSVP</h2>
-            <div class="section-divider"></div>
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-group">
-                    <label for="name">Your Name(s)</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter your full name(s)">
-                </div>
-                <div class="form-group">
-                    <label for="attending">Will you attend?</label>
-                    <select id="attending" name="attending" required>
-                        <option value="">Select an option</option>
-                        <option value="yes">Joyfully Accepts</option>
-                        <option value="no">Regretfully Declines</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="guests">Number of Guests</label>
-                    <select id="guests" name="guests">
-                        <option value="1">1 Guest</option>
-                        <option value="2">2 Guests</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="dietary">Dietary Restrictions</label>
-                    <textarea id="dietary" name="dietary" rows="3" placeholder="Please let us know of any dietary restrictions"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send RSVP</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="gallery">
-        <div class="container">
-            <h2 class="section-title">Our Moments</h2>
-            <div class="section-divider"></div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop" alt="Wedding moment">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=400&fit=crop" alt="Couple photo">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400&h=400&fit=crop" alt="Wedding moment">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=400&fit=crop" alt="Couple photo">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop" alt="Wedding moment">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=400&h=400&fit=crop" alt="Couple photo">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="registry">
-        <div class="container">
-            <h2 class="section-title">Registry</h2>
-            <div class="section-divider"></div>
-            <p>Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we've registered at the following stores:</p>
-            <div class="registry-list">
-                <a href="#" class="registry-item">Crate & Barrel</a>
-                <a href="#" class="registry-item">Williams Sonoma</a>
-                <a href="#" class="registry-item">Amazon</a>
+            <p class="latin">Ad Majorem Dei Gloriam</p>
+            <div class="family-signoff">
+                <p>With joyful hearts,</p>
+                <p class="family-names">Pom Aunty & Jose Uncle</p>
+                <p class="family-names">Seethal, Mary</p>
+                <p class="family-names">And all cousins</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Sarah & James</p>
-        <p>June 15, 2026</p>
-        <p style="margin-top: 1rem;">Made with love</p>
+        <p>Jose & Sheelu</p>
+        <p>11th April 2026</p>
     </footer>
-
-    <script>
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const attending = document.getElementById('attending').value;
-            
-            if (attending === 'yes') {
-                alert(`Thank you, ${name}! We're so excited to celebrate with you!`);
-            } else {
-                alert(`Thank you, ${name}. We'll miss you!`);
-            }
-            
-            this.reset();
-        });
-    </script>
 </body>
 </html>
