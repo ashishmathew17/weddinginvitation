@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jose & Sheelu - Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,12 +13,16 @@
         }
 
         :root {
-            --primary: #8B7355;
-            --secondary: #D4A574;
-            --accent: #C9A86C;
-            --light: #FAF8F5;
-            --dark: #3D3530;
-            --cream: #F5F0E8;
+            --gold: #C5A028;
+            --gold-light: #E2CC6E;
+            --gold-bright: #D4AF37;
+            --gold-dark: #9E7B0A;
+            --gold-shimmer: #F0D96B;
+            --cream: #FAF5ED;
+            --cream-dark: #F0E8D8;
+            --parchment: #F5EFE2;
+            --dark: #2C2416;
+            --dark-brown: #4A3C24;
         }
 
         html {
@@ -28,14 +32,21 @@
         body {
             font-family: 'Lato', sans-serif;
             color: var(--dark);
-            background: var(--light);
+            background: var(--cream);
             line-height: 1.6;
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
         }
 
+        .cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* ========================================
+           HERO SECTION — Kintsugi Gold Style
+           ======================================== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -43,75 +54,243 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--cream) 0%, var(--light) 50%, #EDE8E0 100%);
             position: relative;
             overflow: hidden;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            /* Multi-layered parchment / watercolor background */
+            background:
+                radial-gradient(ellipse at 15% 10%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+                radial-gradient(ellipse at 10% 90%, rgba(212, 175, 55, 0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 85%, rgba(212, 175, 55, 0.06) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(240, 232, 216, 0.4) 0%, transparent 70%),
+                linear-gradient(175deg, #FAF5ED 0%, #F5EFE2 30%, #F0E8D8 60%, #EDE3D1 85%, #F5EFE2 100%);
+            background-size: cover;
         }
 
+        /* Subtle paper texture overlay */
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A574' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(200, 185, 155, 0.015) 2px,
+                    rgba(200, 185, 155, 0.015) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(200, 185, 155, 0.01) 2px,
+                    rgba(200, 185, 155, 0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========================================
+           KINTSUGI SVG CRACKS OVERLAY
+           ======================================== */
+        .kintsugi-cracks {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .kintsugi-cracks svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Gold wreath frame */
+        .gold-wreath {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(85vw, 550px);
+            height: min(85vw, 550px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.35;
+        }
+
+        .gold-wreath svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Watercolor gold patches at corners */
+        .watercolor-patch {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.18;
+        }
+
+        .watercolor-patch.top-left {
+            top: -5%;
+            left: -5%;
+            width: 40%;
+            height: 35%;
+            background: radial-gradient(ellipse at 30% 30%, rgba(212, 175, 55, 0.3) 0%, rgba(226, 204, 110, 0.15) 30%, transparent 65%);
+        }
+
+        .watercolor-patch.top-right {
+            top: -5%;
+            right: -5%;
+            width: 35%;
+            height: 30%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.25) 0%, rgba(226, 204, 110, 0.1) 35%, transparent 60%);
+        }
+
+        .watercolor-patch.bottom-left {
+            bottom: -5%;
+            left: -5%;
+            width: 35%;
+            height: 30%;
+            background: radial-gradient(ellipse at 30% 70%, rgba(212, 175, 55, 0.25) 0%, rgba(226, 204, 110, 0.12) 30%, transparent 65%);
+        }
+
+        .watercolor-patch.bottom-right {
+            bottom: -5%;
+            right: -5%;
+            width: 40%;
+            height: 35%;
+            background: radial-gradient(ellipse at 70% 70%, rgba(212, 175, 55, 0.3) 0%, rgba(226, 204, 110, 0.15) 30%, transparent 65%);
         }
 
         .hero-content {
-            z-index: 1;
+            z-index: 2;
             max-width: 700px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Cross icon */
+        .cross-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cross-icon svg {
+            width: 40px;
+            height: 55px;
         }
 
         .verse {
-            font-style: italic;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--dark-brown);
+            margin-bottom: 0.3rem;
+            line-height: 1.6;
         }
 
-        .verse-source {
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-top: 0.5rem;
+        .verse-ref {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
         }
 
         .hero-ornament {
-            width: 120px;
+            width: 200px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
             margin: 1.5rem auto;
+            position: relative;
+        }
+
+        .salutation {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
         }
 
         .invite-text {
-            font-size: 1rem;
-            color: var(--dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--dark-brown);
             margin-bottom: 1rem;
-            line-height: 1.8;
+            line-height: 2;
+        }
+
+        .couple-section {
+            margin: 1.5rem 0;
         }
 
         .couple-names {
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 2.8rem);
             color: var(--dark);
-            line-height: 1.2;
+            line-height: 1.3;
+            margin: 0.3rem 0;
+        }
+
+        .couple-parents {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--dark-brown);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .event-details-inline {
+            margin: 1.5rem 0;
+        }
+
+        .event-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .event-info {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--dark-brown);
             margin-bottom: 0.5rem;
         }
 
-        .couple-names .ampersand {
-            font-size: 0.5em;
-            font-style: italic;
-            color: var(--primary);
-            margin: 0.5rem 0;
-            display: block;
+        .footnote-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--dark-brown);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
         }
 
-        .hero-date {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-top: 1.5rem;
-            letter-spacing: 2px;
+        .footnote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--dark-brown);
+            margin-top: 0.4rem;
+            line-height: 1.8;
+        }
+
+        .latin-phrase {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--gold-dark);
+            margin-top: 1rem;
         }
 
         .scroll-indicator {
@@ -120,14 +299,15 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            z-index: 3;
         }
 
         .scroll-indicator span {
             display: block;
-            width: 24px;
-            height: 24px;
-            border-right: 2px solid var(--primary);
-            border-bottom: 2px solid var(--primary);
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid var(--gold-dark);
+            border-bottom: 2px solid var(--gold-dark);
             transform: rotate(45deg);
             opacity: 0.5;
         }
@@ -138,127 +318,204 @@
             60% { transform: translateX(-50%) translateY(-5px); }
         }
 
+        /* ========================================
+           OTHER SECTIONS — Kintsugi continuation
+           ======================================== */
         section {
             padding: 5rem 2rem;
+            position: relative;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-align: center;
             margin-bottom: 1rem;
             color: var(--dark);
+            font-weight: 500;
+            letter-spacing: 2px;
         }
 
         .section-divider {
-            width: 60px;
+            width: 120px;
             height: 2px;
-            background: var(--accent);
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
             margin: 0 auto 2.5rem;
+            position: relative;
         }
 
         .message {
-            background: white;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                linear-gradient(180deg, #fff 0%, var(--parchment) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kintsugi-style decorative border for message section */
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 5%, var(--gold) 20%, var(--gold-light) 40%, transparent 50%, var(--gold-light) 60%, var(--gold) 80%, transparent 95%);
+            opacity: 0.5;
+        }
+
+        .message::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 5%, var(--gold) 20%, var(--gold-light) 40%, transparent 50%, var(--gold-light) 60%, var(--gold) 80%, transparent 95%);
+            opacity: 0.5;
         }
 
         .message-text {
             text-align: center;
-            font-size: 1.1rem;
-            line-height: 2;
-            color: #555;
-            max-width: 600px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            line-height: 2.2;
+            color: var(--dark-brown);
+            max-width: 550px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .details {
-            background: var(--cream);
+            background:
+                radial-gradient(ellipse at 10% 50%, rgba(212,175,55,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 50%, rgba(212,175,55,0.04) 0%, transparent 50%),
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
         }
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .detail-card {
-            background: white;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.9) 0%, rgba(250,245,237,0.8) 100%);
             padding: 2.5rem 1.5rem;
             text-align: center;
-            border-radius: 4px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(197, 160, 40, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kintsugi corner accents on detail cards */
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 40px;
+            height: 40px;
+            border-top: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+            opacity: 0.6;
+        }
+
+        .detail-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 40px;
+            height: 40px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            opacity: 0.6;
         }
 
         .detail-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--primary);
+            color: var(--gold-dark);
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .detail-card .icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
+            color: var(--gold);
         }
 
         .detail-card p {
-            color: #666;
+            color: var(--dark-brown);
             margin-bottom: 0.3rem;
+            font-size: 0.95rem;
         }
 
         .detail-card .time {
-            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--dark);
             margin-top: 0.8rem;
         }
 
         .location {
-            background: white;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                linear-gradient(180deg, #fff 0%, var(--parchment) 100%);
             text-align: center;
         }
 
         .location-venue {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem;
             color: var(--dark);
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .location-address {
-            font-size: 1rem;
-            color: #666;
+            font-size: 0.95rem;
+            color: var(--dark-brown);
             margin-bottom: 1rem;
         }
 
         .map-placeholder {
             width: 100%;
-            height: 200px;
-            background: var(--cream);
+            height: 180px;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 60%),
+                linear-gradient(135deg, var(--cream-dark) 0%, var(--cream) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
-            color: #999;
+            border: 1px solid rgba(197, 160, 40, 0.3);
+            color: var(--gold-dark);
         }
 
         .footer-message {
-            background: white;
+            background:
+                radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.04) 0%, transparent 50%),
+                var(--cream);
             text-align: center;
         }
 
         .footer-message p {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
-            color: #666;
-            margin-bottom: 1rem;
+            color: var(--dark-brown);
+            margin-bottom: 0.8rem;
             line-height: 1.8;
         }
 
         .footer-message .latin {
             font-style: italic;
-            color: var(--primary);
+            color: var(--gold-dark);
+            font-size: 1.1rem;
             margin-bottom: 2rem;
         }
 
@@ -266,30 +523,64 @@
             margin-top: 2rem;
         }
 
-        .family-signoff p {
-            color: var(--dark);
-            margin-bottom: 0.3rem;
+        .family-signoff .signoff-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--dark-brown);
+            margin-bottom: 1.5rem;
         }
 
         .family-names {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: var(--primary);
+            color: var(--dark);
             font-weight: 500;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         footer {
             background: var(--dark);
-            color: white;
+            color: var(--gold-light);
             text-align: center;
             padding: 3rem 2rem;
+            border-top: 3px solid var(--gold);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 3px; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-shimmer), transparent);
         }
 
         footer p {
-            opacity: 0.7;
-            font-size: 0.9rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes goldShimmer {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        .kintsugi-cracks .shimmer-path {
+            animation: goldShimmer 4s ease-in-out infinite;
+        }
+
+        .kintsugi-cracks .shimmer-path:nth-child(even) {
+            animation-delay: 2s;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
         @media (max-width: 768px) {
             section {
                 padding: 3rem 1.5rem;
@@ -298,37 +589,190 @@
             .details-grid {
                 grid-template-columns: 1fr;
             }
+
+            .verse {
+                font-size: 1.25rem;
+            }
+
+            .salutation {
+                font-size: 1.6rem;
+            }
+
+            .couple-names {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <section class="hero">
-        <div class="hero-content">
-            <p class="verse">"We love because He first loved us."<br>— 1 John 4:19</p>
-            <p class="verse">"A threefold cord is not quickly broken."<br>— Ecclesiastes 4:12</p>
-            
-            <div class="hero-ornament"></div>
-            
-            <p class="invite-text">
-                Anitha Paulin & Samon Samuel<br>
-                Thazhchayil, Maruthorvattom P.O., Cherthala<br>
-                cordially invite your esteemed presence and prayers to shower your blessings on the auspicious occasion of the Holy Matrimony of our beloved son,
-            </p>
-            
-            <h1 class="couple-names">
-                <span>Jose Gabri Samuel (Jochu)</span>
-                <span class="ampersand">with</span>
-                <span>Sheelu Tony (Chinnu)</span>
-            </h1>
-            
-            <p class="invite-text" style="margin-top: 1rem;">
-                daughter of Mrs. Nicy Tony & Mr. Tony George
-            </p>
-            
-            <p class="hero-date">Saturday, 11th April 2026</p>
-            
-            <div class="hero-ornament"></div>
+        <!-- Watercolor gold patches at corners -->
+        <div class="watercolor-patch top-left"></div>
+        <div class="watercolor-patch top-right"></div>
+        <div class="watercolor-patch bottom-left"></div>
+        <div class="watercolor-patch bottom-right"></div>
+
+        <!-- Kintsugi gold crack veins — SVG overlay -->
+        <div class="kintsugi-cracks">
+            <svg viewBox="0 0 1000 1400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.6"/>
+                        <stop offset="50%" style="stop-color:#F0D96B;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#C5A028;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#E2CC6E;stop-opacity:0.5"/>
+                        <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:0.7"/>
+                        <stop offset="100%" style="stop-color:#F0D96B;stop-opacity:0.5"/>
+                    </linearGradient>
+                    <filter id="goldGlow">
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                </defs>
+
+                <!-- Top-left corner cracks -->
+                <path class="shimmer-path" d="M 0 120 Q 80 150 150 100 Q 200 70 280 130 Q 320 155 350 120" 
+                      stroke="url(#goldGrad1)" stroke-width="2.5" fill="none" filter="url(#goldGlow)" opacity="0.6"/>
+                <path d="M 0 120 Q 40 140 80 115 Q 100 105 80 160 Q 65 200 90 250" 
+                      stroke="url(#goldGrad1)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path class="shimmer-path" d="M 150 0 Q 170 60 130 120 Q 110 160 150 200 Q 170 230 140 280" 
+                      stroke="url(#goldGrad2)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.5"/>
+                <path d="M 0 250 Q 50 230 100 260 Q 140 280 120 330" 
+                      stroke="url(#goldGrad1)" stroke-width="1.8" fill="none" opacity="0.35"/>
+
+                <!-- Top-right corner cracks -->
+                <path class="shimmer-path" d="M 1000 80 Q 920 100 870 60 Q 830 35 780 90 Q 750 115 700 80" 
+                      stroke="url(#goldGrad2)" stroke-width="2.5" fill="none" filter="url(#goldGlow)" opacity="0.6"/>
+                <path d="M 1000 80 Q 960 95 930 70 Q 910 55 930 120 Q 945 170 910 210" 
+                      stroke="url(#goldGrad2)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path class="shimmer-path" d="M 850 0 Q 830 70 880 130 Q 900 160 860 220" 
+                      stroke="url(#goldGrad1)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.5"/>
+                <path d="M 1000 200 Q 940 190 890 220 Q 855 240 880 290" 
+                      stroke="url(#goldGrad2)" stroke-width="1.8" fill="none" opacity="0.35"/>
+
+                <!-- Left side cracks -->
+                <path class="shimmer-path" d="M 0 500 Q 60 480 100 520 Q 130 545 110 600 Q 90 650 130 700" 
+                      stroke="url(#goldGrad1)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.45"/>
+                <path d="M 0 700 Q 50 680 80 720 Q 100 750 70 800" 
+                      stroke="url(#goldGrad2)" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+                <!-- Right side cracks -->
+                <path class="shimmer-path" d="M 1000 550 Q 940 530 900 570 Q 870 600 890 650 Q 910 700 870 750" 
+                      stroke="url(#goldGrad2)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.45"/>
+                <path d="M 1000 750 Q 950 730 920 770 Q 900 800 930 850" 
+                      stroke="url(#goldGrad1)" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+                <!-- Bottom-left corner cracks -->
+                <path class="shimmer-path" d="M 0 1200 Q 70 1180 130 1220 Q 180 1250 230 1200 Q 270 1170 320 1220" 
+                      stroke="url(#goldGrad1)" stroke-width="2.5" fill="none" filter="url(#goldGlow)" opacity="0.6"/>
+                <path d="M 0 1200 Q 40 1210 70 1250 Q 90 1280 60 1330 Q 40 1370 80 1400" 
+                      stroke="url(#goldGrad1)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path class="shimmer-path" d="M 200 1400 Q 180 1340 220 1280 Q 240 1250 200 1200" 
+                      stroke="url(#goldGrad2)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.5"/>
+
+                <!-- Bottom-right corner cracks -->
+                <path class="shimmer-path" d="M 1000 1250 Q 930 1230 870 1270 Q 830 1300 780 1260 Q 740 1230 690 1270" 
+                      stroke="url(#goldGrad2)" stroke-width="2.5" fill="none" filter="url(#goldGlow)" opacity="0.6"/>
+                <path d="M 1000 1250 Q 960 1260 930 1300 Q 910 1330 940 1380 Q 955 1400 940 1400" 
+                      stroke="url(#goldGrad2)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path class="shimmer-path" d="M 800 1400 Q 820 1340 780 1280 Q 760 1250 800 1200" 
+                      stroke="url(#goldGrad1)" stroke-width="2" fill="none" filter="url(#goldGlow)" opacity="0.5"/>
+
+                <!-- Central diagonal cracks (subtle) -->
+                <path d="M 200 400 Q 250 450 230 500 Q 210 540 250 580" 
+                      stroke="url(#goldGrad1)" stroke-width="1.2" fill="none" opacity="0.2"/>
+                <path d="M 800 450 Q 750 490 770 540 Q 790 580 750 620" 
+                      stroke="url(#goldGrad2)" stroke-width="1.2" fill="none" opacity="0.2"/>
+            </svg>
         </div>
+
+        <!-- Circular gold wreath frame -->
+        <div class="gold-wreath">
+            <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="wreathGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#F0D96B;stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#C5A028;stop-opacity:0.8"/>
+                    </linearGradient>
+                </defs>
+                <!-- Irregular circular wreath path -->
+                <ellipse cx="250" cy="250" rx="220" ry="230" 
+                         stroke="url(#wreathGold)" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <ellipse cx="250" cy="250" rx="215" ry="225" 
+                         stroke="url(#wreathGold)" stroke-width="0.8" fill="none" opacity="0.3"
+                         stroke-dasharray="8 12 20 8"/>
+                <!-- Small accent lines radiating from wreath -->
+                <line x1="30" y1="250" x2="60" y2="248" stroke="url(#wreathGold)" stroke-width="1" opacity="0.3"/>
+                <line x1="470" y1="250" x2="440" y2="252" stroke="url(#wreathGold)" stroke-width="1" opacity="0.3"/>
+                <line x1="250" y1="20" x2="248" y2="50" stroke="url(#wreathGold)" stroke-width="1" opacity="0.3"/>
+                <line x1="250" y1="480" x2="252" y2="450" stroke="url(#wreathGold)" stroke-width="1" opacity="0.3"/>
+            </svg>
+        </div>
+
+        <!-- Main Content -->
+        <div class="hero-content">
+            <!-- Cross -->
+            <div class="cross-icon">
+                <svg viewBox="0 0 40 55" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="16" y="0" width="8" height="55" rx="1" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+                    <rect x="4" y="12" width="32" height="8" rx="1" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+                </svg>
+            </div>
+
+            <p class="verse">"We love because He first loved us."</p>
+            <p class="verse-ref">— 1 John 4:19 —</p>
+
+            <div class="hero-ornament"></div>
+
+            <p class="salutation">Dear Friend,</p>
+
+            <p class="invite-text">
+                Nourished by the Eucharist and guided by God's mercy,<br>
+                we are prayerfully preparing to enter<br>
+                the Sacrament of Holy Matrimony.
+            </p>
+
+            <p class="invite-text">
+                As we step into this sacred covenant,<br>
+                we place our marriage in the hands of Christ<br>
+                and humbly seek your prayers,<br>
+                that our married life may be<br>
+                a living witness<br>
+                to Christ's faithful love.
+            </p>
+
+            <div class="couple-section">
+                <p class="couple-names">Jose Gabri Samuel</p>
+                <p class="couple-parents">son of Samon Samuel & Anitha Paulin</p>
+
+                <p class="couple-names">Sheelu Tony</p>
+                <p class="couple-parents">daughter of Tony George & Nicy Tony</p>
+            </div>
+
+            <div class="hero-ornament"></div>
+
+            <div class="event-details-inline">
+                <p class="event-label">Engagement</p>
+                <p class="event-info">8 April 2026</p>
+                <p class="event-info">Holy Cross Church, Elangoi</p>
+
+                <p class="event-label">Holy Matrimony</p>
+                <p class="event-info">St. Andrew's Basilica, Arthunkal</p>
+            </div>
+
+            <div class="hero-ornament"></div>
+
+            <p class="footnote-label">🌿 FOOTNOTE — Clarifying Note (Formal & Gentle)</p>
+            <p class="footnote-text">
+                This is not an official invitation; it is shared as a gentle reminder<br>
+                of the dates and to keep you informed.
+            </p>
+            <p class="latin-phrase">Ad Majorem Dei Gloriam</p>
+        </div>
+
         <div class="scroll-indicator">
             <span></span>
         </div>
@@ -364,7 +808,7 @@
                     <p class="time">11th April 2026</p>
                 </div>
                 <div class="detail-card">
-                    <div class="icon">🎉</div>
+                    <div class="icon">♥</div>
                     <h3>Reception</h3>
                     <p>St. Sebastian Parish Hall</p>
                     <p>Near the Church</p>
@@ -390,7 +834,7 @@
         <div class="container">
             <p class="latin">Ad Majorem Dei Gloriam</p>
             <div class="family-signoff">
-                <p>With joyful hearts,</p>
+                <p class="signoff-text">With joyful hearts,</p>
                 <p class="family-names">Pom Aunty & Jose Uncle</p>
                 <p class="family-names">Seethal, Mary</p>
                 <p class="family-names">And all cousins</p>
