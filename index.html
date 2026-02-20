@@ -563,6 +563,85 @@
         }
 
         /* ========================================
+           COUNTDOWN
+           ======================================== */
+        .countdown-section {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 60%),
+                linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+            text-align: center;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .countdown-block {
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.9) 0%, rgba(250,245,237,0.8) 100%);
+            border: 1px solid rgba(197, 160, 40, 0.35);
+            padding: 1.8rem 2rem;
+            min-width: 110px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 28px; height: 28px;
+            border-top: 1.5px solid var(--gold);
+            border-left: 1.5px solid var(--gold);
+            opacity: 0.6;
+        }
+
+        .countdown-block::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 28px; height: 28px;
+            border-bottom: 1.5px solid var(--gold);
+            border-right: 1.5px solid var(--gold);
+            opacity: 0.6;
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        .countdown-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dark-brown);
+            margin-top: 0.5rem;
+        }
+
+        .countdown-event-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--dark-brown);
+            margin-top: 1.5rem;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .countdown-zero {
+            color: var(--gold) !important;
+        }
+
+        /* ========================================
            RESPONSIVE
            ======================================== */
         @media (max-width: 768px) {
@@ -584,6 +663,15 @@
 
             .couple-names {
                 font-size: 1.8rem;
+            }
+
+            .countdown-block {
+                min-width: 80px;
+                padding: 1.2rem 1.2rem;
+            }
+
+            .countdown-number {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -798,6 +886,29 @@
         </div>
     </section>
 
+    <!-- Countdown Timer -->
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="section-title">Counting Down With Joy</h2>
+            <div class="section-divider"></div>
+            <div class="countdown-wrapper">
+                <div class="countdown-block">
+                    <div class="countdown-number" id="cd-days">—</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-block">
+                    <div class="countdown-number" id="cd-hours">—</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-block">
+                    <div class="countdown-number" id="cd-minutes">—</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+            </div>
+            <p class="countdown-event-label">Until the Holy Matrimony · 11th April 2026</p>
+        </div>
+    </section>
+
     <section class="location">
         <div class="container">
             <h2 class="section-title">Location</h2>
@@ -834,5 +945,48 @@
         <p>Jose & Sheelu</p>
         <p>11th April 2026</p>
     </footer>
+
+    <script>
+        (function () {
+            // Wedding date: 11 April 2026, 10:00 AM IST
+            var weddingDate = new Date('2026-04-11T10:00:00+05:30');
+
+            function pad(n) {
+                return n < 10 ? '0' + n : n;
+            }
+
+            function updateCountdown() {
+                var now = new Date();
+                var diff = weddingDate - now;
+
+                var daysEl    = document.getElementById('cd-days');
+                var hoursEl   = document.getElementById('cd-hours');
+                var minutesEl = document.getElementById('cd-minutes');
+
+                if (diff <= 0) {
+                    daysEl.textContent    = '00';
+                    hoursEl.textContent   = '00';
+                    minutesEl.textContent = '00';
+                    [daysEl, hoursEl, minutesEl].forEach(function (el) {
+                        el.classList.add('countdown-zero');
+                    });
+                    return;
+                }
+
+                var totalMinutes = Math.floor(diff / 60000);
+                var totalHours   = Math.floor(totalMinutes / 60);
+                var days         = Math.floor(totalHours / 24);
+                var hours        = totalHours % 24;
+                var minutes      = totalMinutes % 60;
+
+                daysEl.textContent    = pad(days);
+                hoursEl.textContent   = pad(hours);
+                minutesEl.textContent = pad(minutes);
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 30000); // refresh every 30 s
+        })();
+    </script>
 </body>
 </html>
