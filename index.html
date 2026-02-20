@@ -904,6 +904,10 @@
                     <div class="countdown-number" id="cd-minutes">—</div>
                     <div class="countdown-label">Minutes</div>
                 </div>
+                <div class="countdown-block">
+                    <div class="countdown-number" id="cd-seconds">—</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
             </div>
             <p class="countdown-event-label">Until the Holy Matrimony · 11th April 2026</p>
         </div>
@@ -962,30 +966,35 @@
                 var daysEl    = document.getElementById('cd-days');
                 var hoursEl   = document.getElementById('cd-hours');
                 var minutesEl = document.getElementById('cd-minutes');
+                var secondsEl = document.getElementById('cd-seconds');
 
                 if (diff <= 0) {
                     daysEl.textContent    = '00';
                     hoursEl.textContent   = '00';
                     minutesEl.textContent = '00';
-                    [daysEl, hoursEl, minutesEl].forEach(function (el) {
+                    secondsEl.textContent = '00';
+                    [daysEl, hoursEl, minutesEl, secondsEl].forEach(function (el) {
                         el.classList.add('countdown-zero');
                     });
                     return;
                 }
 
-                var totalMinutes = Math.floor(diff / 60000);
+                var totalSeconds = Math.floor(diff / 1000);
+                var totalMinutes = Math.floor(totalSeconds / 60);
                 var totalHours   = Math.floor(totalMinutes / 60);
                 var days         = Math.floor(totalHours / 24);
                 var hours        = totalHours % 24;
                 var minutes      = totalMinutes % 60;
+                var seconds      = totalSeconds % 60;
 
                 daysEl.textContent    = pad(days);
                 hoursEl.textContent   = pad(hours);
                 minutesEl.textContent = pad(minutes);
+                secondsEl.textContent = pad(seconds);
             }
 
             updateCountdown();
-            setInterval(updateCountdown, 30000); // refresh every 30 s
+            setInterval(updateCountdown, 1000); // refresh every second
         })();
     </script>
 </body>
