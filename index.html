@@ -642,6 +642,31 @@
         }
 
         /* ========================================
+           SCROLLING IMAGES
+           ======================================== */
+        .scrolling-images-container {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            pointer-events: none; /* Let clicks pass through */
+            z-index: 50; /* Above most elements */
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .scroll-img {
+            width: clamp(120px, 20vw, 250px);
+            height: auto;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3)); /* Perfect for transparent PNGs */
+        }
+
+        /* ========================================
            RESPONSIVE
            ======================================== */
         @media (max-width: 768px) {
@@ -677,6 +702,11 @@
     </style>
 </head>
 <body>
+    <div class="scrolling-images-container">
+        <img src="groom-nobg.png" id="groom-img" class="scroll-img" alt="Groom">
+        <img src="bride-nobg.png" id="bride-img" class="scroll-img" alt="Bride">
+    </div>
+
     <section class="hero">
         <!-- Watercolor gold patches at corners -->
         <div class="watercolor-patch top-left"></div>
@@ -832,6 +862,7 @@
                 <p class="event-info">Holy Cross Church, Elangoi</p>
 
                 <p class="event-label">Holy Matrimony</p>
+                <p class="event-info">11 April 2026, 11:00 AM</p>
                 <p class="event-info">St. Andrew's Basilica, Arthunkal</p>
             </div>
 
@@ -873,7 +904,7 @@
                     <h3>Holy Matrimony</h3>
                     <p>St. Andrew's Basilica</p>
                     <p>Arthunkal</p>
-                    <p class="time">11th April 2026</p>
+                    <p class="time">11th April 2026, 11:00 AM</p>
                 </div>
                 <div class="detail-card">
                     <div class="icon">♥</div>
@@ -935,7 +966,6 @@
 
     <section class="footer-message">
         <div class="container">
-            <p class="latin">Ad Majorem Dei Gloriam</p>
             <div class="family-signoff">
                 <p class="signoff-text">With joyful hearts,</p>
                 <p class="family-names">Pom Aunty & Jose Uncle</p>
@@ -946,14 +976,14 @@
     </section>
 
     <footer>
-        <p>Jose & Sheelu</p>
+        <p class="latin">Ad Majorem Dei Gloriam</p>
         <p>11th April 2026</p>
     </footer>
 
     <script>
         (function () {
-            // Wedding date: 11 April 2026, 10:00 AM IST
-            var weddingDate = new Date('2026-04-11T10:00:00+05:30');
+            // Wedding date: 11 April 2026, 11:00 AM IST
+            var weddingDate = new Date('2026-04-11T11:00:00+05:30');
 
             function pad(n) {
                 return n < 10 ? '0' + n : n;
@@ -995,6 +1025,32 @@
 
             updateCountdown();
             setInterval(updateCountdown, 1000); // refresh every second
+
+            // Scroll Animation for Bride & Groom Images
+            function updateScrollImages() {
+                var scrollY = window.scrollY || window.pageYOffset;
+                var body = document.body;
+                var html = document.documentElement;
+                var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+                var maxScroll = docHeight - window.innerHeight;
+                var scrollFraction = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+                
+                var groom = document.getElementById('groom-img');
+                var bride = document.getElementById('bride-img');
+                
+                if (groom && bride) {
+                    // Scale from 1 to 1.4 as you scroll down
+                    var currentScale = 1 + (scrollFraction * 0.4);
+                    
+                    // Only apply scaling, no translation needed
+                    groom.style.transform = 'scale(' + currentScale + ')';
+                    bride.style.transform = 'scale(' + currentScale + ')';
+                }
+            }
+
+            window.addEventListener('scroll', updateScrollImages, {passive: true});
+            window.addEventListener('resize', updateScrollImages, {passive: true});
+            setTimeout(updateScrollImages, 100);
         })();
     </script>
 </body>
