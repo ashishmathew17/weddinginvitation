@@ -803,7 +803,135 @@
         /* ========================================
            RESPONSIVE
            ======================================== */
+        body.no-scroll {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* ========================================
+           ENTRY CARD ANIMATION
+           ======================================== */
+        .entry-card {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            pointer-events: auto;
+            transition: visibility 0s 1.2s;
+        }
+
+        .entry-card.open {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .card-flap {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            background: var(--cream);
+            background-image: 
+                radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(200, 185, 155, 0.015) 2px, rgba(200, 185, 155, 0.015) 4px);
+            z-index: 1;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .top-flap {
+            top: 0;
+            border-bottom: 2px solid var(--gold);
+            transform-origin: top;
+        }
+
+        .bottom-flap {
+            bottom: 0;
+            border-top: 2px solid var(--gold);
+            transform-origin: bottom;
+        }
+
+        .entry-card.open .top-flap {
+            transform: translateY(-100%);
+        }
+
+        .entry-card.open .bottom-flap {
+            transform: translateY(100%);
+        }
+
+        @keyframes cardShake {
+            0%, 85%, 100% { transform: translateX(0); }
+            87%, 91%, 95% { transform: translateX(-4px); }
+            89%, 93%, 97% { transform: translateX(4px); }
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: var(--cream);
+            padding: 3rem 2rem;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 90%;
+            width: 400px;
+            transition: opacity 0.5s ease 0s, transform 0.5s ease 0s;
+            animation: cardShake 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .card-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 30px; height: 30px;
+            border-top: 2px solid var(--gold-dark);
+            border-left: 2px solid var(--gold-dark);
+        }
+        .card-content::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 30px; height: 30px;
+            border-bottom: 2px solid var(--gold-dark);
+            border-right: 2px solid var(--gold-dark);
+        }
+
+        .entry-card.open .card-content {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: none;
+        }
+
+        .open-btn {
+            background: transparent;
+            border: 1px solid var(--gold-dark);
+            color: var(--gold-dark);
+            padding: 12px 30px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .open-btn:hover {
+            background: var(--gold-dark);
+            color: var(--cream);
+        }
+
         @media (max-width: 768px) {
+            .card-content {
+                padding: 2.5rem 1.5rem;
+            }
+
             section {
                 padding: 3rem 1.5rem;
             }
@@ -835,7 +963,18 @@
         }
     </style>
 </head>
-<body>
+<body class="no-scroll">
+    <!-- Entry Card Overlay -->
+    <div id="entry-card" class="entry-card">
+        <div class="card-flap top-flap"></div>
+        <div class="card-flap bottom-flap"></div>
+        <div class="card-content">
+            <h1 class="cursive" style="font-size: 3rem; color: var(--gold-dark); margin-bottom: 0.5rem;">Jose & Sheelu</h1>
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--dark-brown); margin-bottom: 2rem; letter-spacing: 2px;">INVITE YOU TO SHARE THEIR JOY IN CHRIST</p>
+            <button id="open-btn" class="open-btn">Open Invitation</button>
+        </div>
+    </div>
+
     <!-- Background Music -->
     <audio id="bg-music" loop>
         <source src="puthankalam.mpeg" type="audio/mpeg">
@@ -1309,17 +1448,17 @@
                 });
             };
 
-            // Play on first user interaction
-            var firstInteraction = function() {
-                attemptPlay();
-                document.removeEventListener('click', firstInteraction);
-                document.removeEventListener('touchstart', firstInteraction);
-                document.removeEventListener('scroll', firstInteraction);
-            };
-            
-            document.addEventListener('click', firstInteraction);
-            document.addEventListener('touchstart', firstInteraction);
-            document.addEventListener('scroll', firstInteraction);
+            // Card Opening Logic
+            var entryCard = document.getElementById('entry-card');
+            var cardContent = document.querySelector('.card-content');
+
+            if (entryCard && cardContent) {
+                cardContent.addEventListener('click', function() {
+                    entryCard.classList.add('open');
+                    document.body.classList.remove('no-scroll');
+                    attemptPlay();
+                });
+            }
 
             musicToggle.addEventListener('click', function(e) {
                 e.stopPropagation(); // prevent triggering the document click
